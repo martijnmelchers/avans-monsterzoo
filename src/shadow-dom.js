@@ -1,13 +1,8 @@
 var header = document.createElement("header");
 var shadowRoot = header.attachShadow({mode: 'open'});
 
-
-
-
-
-
 // Base custom element class that handles shadow dom.
-class CustomElement extends HTMLElement {
+export class CustomElement extends HTMLElement {
 
         // Define template name with super("<template_name>")
         constructor(templateName){
@@ -21,18 +16,13 @@ class CustomElement extends HTMLElement {
 
 
 // Example custom element implementation.
-class SausElement extends CustomElement {
-
-
+export class SausElement extends CustomElement {
     get open(){
         return this.hasAttribute('open');    
     }
-
     constructor(){
-        super("saus-template");
-        
+        super("saus-template");   
+
+        this.a
     }
 }
-
-// Add the custom element to the list.
-customElements.define('my-monster', SausElement)

@@ -1,0 +1,23 @@
+{
+  "name": "monsterzoo-webs",
+  "version": "1.0.0",
+  "description": "webs3 eindopdracht Avans Hogeschool",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaschaMendel/monsterzoo-webs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaschaMendel/monsterzoo-webs/issues"
+  },
+  "homepage": "https://github.com/SaschaMendel/monsterzoo-webs#readme",
+  "devDependencies": {
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  }
+}

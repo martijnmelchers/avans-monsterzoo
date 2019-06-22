@@ -1,1 +1,3 @@
-alert('bruh');
+class Storage {
+
+}

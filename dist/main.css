@@ -24,10 +24,10 @@
     display: none;
 }
 
-.zoo-tile {
-    border: 1px solid black;
+.grid-container.visible {
+    display: grid;
 }
 
-.visible {
-    display: grid;
+.zoo-tile {
+    border: 1px solid black;
 }

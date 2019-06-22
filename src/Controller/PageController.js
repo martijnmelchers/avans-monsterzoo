@@ -1,7 +1,7 @@
-import {Controller} from './Controller';
-import {GridModel} from '../Model/grid';
-import {GridView} from '../View/GridView'
-import {GridController} from '../Controller/GridController';
+import { Controller } from './Controller';
+import { GridModel } from '../Model/grid';
+import { GridView } from '../View/GridView'
+import { GridController } from '../Controller/GridController';
 
 export class PageController extends Controller {
     initialize() {

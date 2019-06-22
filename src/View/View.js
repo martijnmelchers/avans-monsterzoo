@@ -1,12 +1,14 @@
 export class View {
-    constructor(element){
+    constructor(element) {
         this.element = element;
         this.display = true;
     }
-    render(model){
+
+    render(model) {
         //
     }
-    set display(setDisplay){
+
+    set display(setDisplay) {
 
     }
 }

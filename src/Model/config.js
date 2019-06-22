@@ -1,6 +1,6 @@
 export const Config = {
     grid: {
-        rows: 15,
-        columns: 15
+        rows: 10,
+        columns: 10
     }
 };

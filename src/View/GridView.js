@@ -1,4 +1,4 @@
-import {View} from './View';
+import { View } from './View';
 
 export class GridView extends View {
     render(model) {
@@ -13,14 +13,14 @@ export class GridView extends View {
 
         for (let x = 0; x < this.model.rows; x++) {
             for (let y = 0; y < this.model.columns; y++) {
-                gridItems.push(GridView.createTile(x, y));
+                gridItems.push(this.createTile(x, y));
             }
         }
         return gridItems;
     }
 
-    static createTile(x, y) {
-        return `<div class="zoo-tile" data-x="${x}" data-y="${y}"></div>`;
+    createTile(x, y) {
+        return `<div class="zoo-tile ${this.model.isDisabled(x, y) ? "disabled" : ""}" data-x="${x}" data-y="${y}"></div>`;
     }
 
     set display(setDisplay) {

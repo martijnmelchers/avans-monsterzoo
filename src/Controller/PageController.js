@@ -2,65 +2,95 @@ import { Controller } from './Controller';
 import { GridModel } from '../Model/grid';
 import { GridView } from '../View/GridView'
 import { GridController } from '../Controller/GridController';
+import { WeatherController } from '../Controller/WeatherController';
+import { WeatherView } from '../View/WeatherView';
+import { WeatherModel } from '../Model/weather';
 
 export class PageController extends Controller {
     initialize() {
-        this.gridModel = new GridModel();
-
-
         this.view.onShowJungle = this.onShowJungle.bind(this);
-        this.view.onShowDesert = this.onShowDesert.bind(this);
-        this.view.onShowNorthPole = this.onShowNorthpole.bind(this);
+        this.view.onShowSahara = this.onShowSahara.bind(this);
+        this.view.onShowNorthPole = this.onShowNorthPole.bind(this);
 
-        this.jungle();
-        this.desert();
-        this.northPole();
+        this.initializeJungle();
+        this.initializeSahara();
+        this.initializeNorthPole();
+
+        this.initializeWeather();
 
         this.view.render();
-        this.resetdisplays();
+        this.resetVisible();
     }
 
-    jungle() {
-        this.jungleView = new GridView(document.getElementById("jungleGrid"));
-        this.jungleController = new GridController(this.gridModel, this.jungleView).initialize();
-        this.jungleView.render(this.gridModel);
+
+    initializeWeather() {
+        this.weatherView = new WeatherView(document.getElementById("weather"));
+        this.weatherModel = new WeatherModel();
+        this.weatherController = new WeatherController(this.weatherModel, this.weatherView);
+        this.weatherController.initialize();
     }
 
-    desert() {
-        this.deserView = new GridView(document.getElementById("desertGrid"));
-        this.desertController = new GridController(this.gridModel, this.deserView).initialize();
-        this.deserView.render(this.gridModel);
+    initializeJungle() {
+        const jungleElement = document.getElementById("jungleGrid");
+        const jungleModel = new GridModel("Jungle", "Jungle");
+
+        this.jungleView = new GridView(jungleElement);
+
+        /* Create controller for the jungle */
+        new GridController(jungleModel, this.jungleView).initialize();
+
+        this.jungleView.render(jungleModel);
     }
 
-    northPole() {
-        this.northPoleView = new GridView(document.getElementById("northPoleGrid"));
-        this.northPoleController = new GridController(this.gridModel, this.northPoleView).initialize();
-        this.northPoleView.render(this.gridModel);
+    initializeSahara() {
+        const saharaElement = document.getElementById("saharaGrid");
+        const saharaModel = new GridModel("Sahara", "Sahara");
+
+        this.saharaView = new GridView(saharaElement);
+
+        /* Create controller for the sahara */
+        new GridController(saharaModel, this.saharaView).initialize();
+
+        this.saharaView.render(saharaModel);
+    }
+
+    initializeNorthPole() {
+        const northPoleElement = document.getElementById("northPoleGrid");
+        const northPoleModel = new GridModel("Noordpool", "NorthPole");
+
+        this.northPoleView = new GridView(northPoleElement);
+
+        /* Create controller for the north pole */
+        new GridController(northPoleModel, this.northPoleView).initialize();
+
+        this.northPoleView.render(northPoleModel);
     }
 
 
     onShowJungle() {
-        this.resetdisplays();
+        this.resetVisible();
         this.jungleView.display = true;
-        console.log("jungle");
+
+        this.weatherController.showWeather("Rio");
     }
 
-    onShowDesert() {
-        this.resetdisplays();
-        this.deserView.display = true;
-        console.log("desert");
+    onShowSahara() {
+        this.resetVisible();
+        this.saharaView.display = true;
+
+        this.weatherController.showWeather("Sahara");
     }
 
-    onShowNorthpole() {
-        this.resetdisplays();
+    onShowNorthPole() {
+        this.resetVisible();
         this.northPoleView.display = true;
 
-        console.log("northpole");
+        this.weatherController.showWeather("Finland");
     }
 
-    resetdisplays() {
+    resetVisible() {
         this.jungleView.display = false;
-        this.deserView.display = false;
+        this.saharaView.display = false;
         this.northPoleView.display = false
     }
 }

@@ -1,0 +1,31 @@
+.zoo {
+    
+}
+
+
+.configurator {
+    height: 500px;
+    border: 1px solid black;
+    width: 300px;
+    display: inline-block;    
+    float: left;
+}
+
+.zoo-wrapper{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    position: relative;
+    float: left;
+    margin-left: 30px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(9, 50px);
+    grid-template-columns: repeat(18, 50px);
+}
+
+.zoo-tile {
+    border: 1px solid black;
+}

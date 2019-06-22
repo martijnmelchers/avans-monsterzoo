@@ -85,7 +85,7 @@ export class PageController extends Controller {
         this.resetVisible();
         this.northPoleView.display = true;
 
-        this.weatherController.showWeather("Finland");
+        this.weatherController.showWeather("Longyearbyen");
     }
 
     resetVisible() {

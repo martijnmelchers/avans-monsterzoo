@@ -7,11 +7,6 @@ export class View {
         //
     }
     set display(setDisplay){
-        if(setDisplay){
-            this.element.style.display = "block"
-        }
-        else{
-            this.element.style.display = "none";
-        }
+
     }
 }

@@ -2,6 +2,9 @@ import {Controller} from './Controller';
 import {GridModel} from '../Model/grid';
 import {GridView} from '../View/GridView'
 import {GridController} from '../Controller/GridController';
+import {WeatherController} from '../Controller/WeatherController';
+import {WeatherView} from '../View/WeatherView';
+import { WeatherModel } from '../Model/weather';
 
 export class PageController extends Controller {
     initialize() {
@@ -15,9 +18,19 @@ export class PageController extends Controller {
         this.jungle();
         this.desert();
         this.northPole();
+        this.weather();
 
         this.view.render();
         this.resetdisplays();
+    }
+
+
+
+    weather(){
+        this.weatherView = new WeatherView(document.getElementById("weather"))
+        this.weatherModel = new WeatherModel();
+        this.weatherController = new WeatherController(this.weatherModel, this.weatherView);
+        this.weatherController.initialize();
     }
 
     jungle() {
@@ -42,16 +55,22 @@ export class PageController extends Controller {
     onShowJungle() {
         this.resetdisplays();
         this.jungleView.display = true;
+
+        this.weatherController.showWeather("Rio");
     }
 
     onShowDesert() {
         this.resetdisplays();
         this.deserView.display = true;
+
+        this.weatherController.showWeather("Sahara");
     }
 
     onShowNorthpole() {
         this.resetdisplays();
         this.northPoleView.display = true;
+
+        this.weatherController.showWeather("Finland");
     }
 
     resetdisplays() {

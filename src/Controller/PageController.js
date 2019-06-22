@@ -42,20 +42,16 @@ export class PageController extends Controller {
     onShowJungle() {
         this.resetdisplays();
         this.jungleView.display = true;
-        console.log("jungle");
     }
 
     onShowDesert() {
         this.resetdisplays();
         this.deserView.display = true;
-        console.log("desert");
     }
 
     onShowNorthpole() {
         this.resetdisplays();
         this.northPoleView.display = true;
-
-        console.log("northpole");
     }
 
     resetdisplays() {

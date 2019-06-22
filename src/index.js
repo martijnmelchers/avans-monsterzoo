@@ -1,3 +1,10 @@
+import { initialize } from './Model/init';
+
+initialize();
+
+
+// Todo: remove this
+
 class ZooController {
     
 }

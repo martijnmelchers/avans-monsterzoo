@@ -7,14 +7,17 @@ export class GridView extends View {
         this.renderTiles();        
     }
 
-    renderTiles(){
-        for (let index = 0; index < this.model.numTiles;  index++) {
-            this.createTile(index);
+    renderTiles() {
+        /* Since the grid is dynamically generated the CSS needs to be added dynamically */
+        this.element.style = `grid-template-rows: repeat(${this.rows}, 50px);grid-template-columns: repeat(${this.columns}, 50px);`
+        for (let x = 0; x < this.model.rows; x++) {
+            for (let y = 0; y < this.model.columns; y++) {
+                this.createTile(x, y);
+            }
         }
     }
-    createTile(index){
-        this.element.innerHTML += `
-            <div id="` + index + `" class="zoo-tile"></div>
-        `;
+
+    createTile(x, y) {
+        this.element.innerHTML += `<div class="zoo-tile" data-x="${x}" data-y="${y}"></div>`;
     }
 }

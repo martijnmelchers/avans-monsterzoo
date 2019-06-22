@@ -1,5 +1,5 @@
 .zoo {
-    
+
 }
 
 
@@ -7,11 +7,11 @@
     height: 500px;
     border: 1px solid black;
     width: 300px;
-    display: inline-block;    
+    display: inline-block;
     float: left;
 }
 
-.zoo-wrapper{
+.zoo-wrapper {
     display: inline-block;
     width: auto;
     height: auto;

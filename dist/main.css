@@ -21,9 +21,13 @@
 }
 
 .grid-container {
-    display: grid;
+    display: none;
     grid-template-rows: repeat(9, 50px);
     grid-template-columns: repeat(18, 50px);
+}
+
+.grid-container.visible {
+    display: grid;
 }
 
 .zoo-tile {

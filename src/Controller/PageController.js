@@ -24,8 +24,6 @@ export class PageController extends Controller {
         this.resetdisplays();
     }
 
-
-
     weather(){
         this.weatherView = new WeatherView(document.getElementById("weather"))
         this.weatherModel = new WeatherModel();
@@ -70,7 +68,7 @@ export class PageController extends Controller {
         this.resetdisplays();
         this.northPoleView.display = true;
 
-        this.weatherController.showWeather("Finland");
+        this.weatherController.showWeather("Longyearbyen");
     }
 
     resetdisplays() {

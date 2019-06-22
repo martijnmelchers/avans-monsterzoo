@@ -2,8 +2,7 @@ import {GridController } from '../Controller/GridController';
 import {PageController } from '../Controller/PageController';
 import {WeatherModel} from './weather';
 import {PageView } from '../View/PageView';
-import {WeatherController} from '../Controller/WeatherController';
-import {WeatherView} from '../View/WeatherView';
+
 export function initialize() {
     console.log('App initialization started');
     console.log('Loading...');

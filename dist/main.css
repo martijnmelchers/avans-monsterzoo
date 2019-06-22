@@ -31,3 +31,7 @@
 .zoo-tile {
     border: 1px solid black;
 }
+
+.zoo-tile.disabled {
+    background: red;
+}

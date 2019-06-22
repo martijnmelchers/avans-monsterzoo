@@ -30,8 +30,10 @@
 
 .zoo-tile {
     border: 1px solid black;
+    background-image: url('../grass-jungle.png')
 }
 
 .zoo-tile.disabled {
     background: red;
+    background-image: url("../water.png");
 }

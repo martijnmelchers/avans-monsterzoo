@@ -20,10 +20,20 @@ export class GridView extends View {
     }
 
     createTile(x, y) {
-        return `<div class="zoo-tile ${this.model.isDisabled(x, y) ? "disabled" : ""}" data-x="${x}" data-y="${y}"></div>`;
+        return `<div class="zoo-tile ${this.model.isDisabled(x, y) ? "disabled" : ""}" data-x="${x}" data-y="${y}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
     }
 
     set display(setDisplay) {
         setDisplay ? this.element.classList.add("visible") : this.element.classList.remove("visible");
+    }
+
+    static drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    static drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
     }
 }

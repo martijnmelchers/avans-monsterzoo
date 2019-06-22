@@ -1,10 +1,11 @@
-import { Grid } from './grid.js';
+import {GridController } from '../Controller/GridController';
+import {GridView } from '../View/GridView';
 
 export function initialize() {
     console.log('App initialization started');
     console.log('Loading...');
 
-    
-    const grid = new Grid("mainGrid");
-    grid.renderTiles();
+    let view = new GridView(document.getElementById("mainGrid"));
+    let controller = new GridController(null, view);
+    controller.initialize();
 }

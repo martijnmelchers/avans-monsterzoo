@@ -9,7 +9,7 @@ export class Grid {
             this.createTile(index);
         }
     }
-    
+
     createTile(index){
         document.getElementById(this.gridElement).innerHTML += `
             <div id="` + index + `" class="zoo-tile"></div>

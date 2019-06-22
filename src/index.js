@@ -1,15 +1,21 @@
-
-
-
 class ZooController {
     
 }
 
-class Monster {
-    get type(){
-        return this.element;
+class Tile {
+    constructor(){
+        this.name = "Area";
+        this.climate = "Neutral";
+        this.reference_city = "Amsterdam";
+        this.monster = null;
     }
+    set monster(monster){
+        this.monster = monster;
+    }
+}
 
+
+class Monster {
     constructor(){
         this.name = "Monster";
         this.element = "Monster";
@@ -42,41 +48,45 @@ class Monster {
 
 
 
-let monster = new Monster();
-
-monster.configure({
-    name: "Fucking beast ",
-    furType : "Veren",
-    element: "Fire",
-    numArms : 10,
-    numLegs : 12,
-    canSwim : true,     
-    canFly : false,
-    color : "Red",
-});
-
-console.log(monster);
 
 class WindMonster extends Monster {
     constructor(){
+        super();
         this.element = "Wind";
-    }    
+    }
+    verify(){        
+    }
 }
 
 class FireMonster extends Monster  {
     constructor(){
+        super();
         this.element = "Fire";
     }
 }
 
 class EarthMonster extends Monster {
     constructor(){
+        super();
         this.element = "Earth";
     }
 }
 
 class WaterMonster extends Monster {
     constructor(){
+        super();
         this.element = "Water";
     }
 }
+
+
+let wind = new WindMonster();
+wind.configure({
+    name: "Epic gamer",
+    numArms: 9,
+    numLegs: 2,
+    canFly: true,
+    canSwim: false,
+    color: "red",
+    furType: "Feathers",
+});

@@ -26,6 +26,13 @@ html, body  {
 
 .grid-container {
     display: none;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 .grid-container.visible {
@@ -35,6 +42,10 @@ html, body  {
 .zoo-tile {
     border: 1px solid black;
     background-size: cover !important;
+}
+
+.zoo-tile img {
+    width: 50px;
 }
 
 
@@ -62,4 +73,13 @@ html, body  {
 
 .grid-container.north-pole .zoo-tile.disabled{
     background: url("../water.png");
+}
+
+#monsterCanvas canvas {
+    border: 1px solid black;
+}
+
+#available-monsters img {
+    width: 50px;
+    border: 1px solid black;
 }

@@ -14,12 +14,20 @@ export const Config = {
         types: {
             water:{
                 arms: {
-                    min: 0,
-                    max: 8,
-                    types: [
-                        "Tentakels",
-                        "Vinnen"
-                    ]
+                    fields: [
+                        { 
+                            name: "arms",
+                            min: 0,
+                            max: 8,
+                        },
+                        {
+                            name: "armType",
+                            types: [
+                                "Tentakels",
+                                "Vinnen",
+                            ]
+                        }
+                    ], 
                 },
                 legs: {
                     maxArms: 4,
@@ -48,13 +56,22 @@ export const Config = {
             },
             fire: {
                 arms: {
-                    min: 0,
-                    max: 6,
-                    types: [
-                        "Tentakels",
-                        "Klauwen",
-                        "klauw-vleugels"
-                    ]
+                    fields: [
+                        { 
+                            name: "arms",
+                            min: 0,
+                            max: 6,
+                        },
+                        {
+                            name: "armType",
+                            types: [
+                                "Tentakels",
+                                "Klauwen",
+                                "klauw-vleugels"
+                            ]
+                        }
+                    ], 
+
                 },
                 legs: {
                     maxArms: 2,
@@ -85,11 +102,19 @@ export const Config = {
             },
             earth: {
                 arms: {
-                    min: 2,
-                    max: 2,
-                    types: [
-                        "Klauwen",
-                    ]
+                    fields: [
+                        { 
+                            name: "arms",
+                            min: 2,
+                            max: 2,
+                        },
+                        {
+                            name: "armType",
+                            types: [
+                                "Klauwen",
+                            ]
+                        }
+                    ], 
                 },
                 legs: {
                     types:[
@@ -129,9 +154,13 @@ export const Config = {
                     ]
                 },
                 legs: {
-                    types: [
-                        0,
-                        2
+                    fields:[
+                        {
+                            types: [
+                                0,
+                                2
+                            ]
+                        }
                     ]
                 },
                 eyes: {

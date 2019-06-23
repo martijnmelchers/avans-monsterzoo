@@ -3,7 +3,21 @@ import { View } from "./View";
 
 
 export class MonsterView extends View {
+
     render(model) {
+
+        this.labels = {
+            eyes: "Aantal ogen",
+            canSwim: "kan hij zwemmen",
+            arms: "Aantal armen",
+            legs: "Aantal benen",
+            legType: "Type been",
+            armType: "Type arm",
+            fur: "Type vacht",
+            canFly: "Kan hij vliegen", 
+            color: "Kleur",
+        };
+
         let monsterForm = this.element.querySelector("#monsterCreateForm");
         monsterForm.addEventListener("submit", this.onMonsterCreate);
 
@@ -25,13 +39,16 @@ export class MonsterView extends View {
 
     setLimitations(limitations) {
         //TODO: change fields based on limitations.
+        this.resetFields();
+
+    
         for (const limitation in limitations) {
             if (limitations.hasOwnProperty(limitation)) {
                 const element = limitations[limitation];
-
                 this.renderField(element, limitation);
             }
         }
+
     }
 
     createCanvas(parent, width, height) {
@@ -136,27 +153,105 @@ export class MonsterView extends View {
         }.bind(this);
     }
 
+    resetFields(){
+        let form = this.element.querySelector("#form-dynamic");
 
-    // Renders indivudual monster fields
-    renderField(limitations, key){
-        var group = this.element.querySelector(`input[name='${key}']`);
-        if(group !== null){
-            let shadow = group.parentNode;
-            const shadowEl = shadow.attachShadow({mode: 'open'});
-            let el = document.createElement(this.getLimitationFieldType(limitations)[0]);
-            shadowEl.appendChild(el);
+        while (form.firstChild) {
+            form.removeChild(form.firstChild);
         }
     }
 
 
+    // Renders indivudual monster fields
+    renderField(limitations, key){
+        let form = this.element.querySelector("#form-dynamic");
+
+        if(limitations.fields){
+            limitations.fields.forEach((fieldVal) => {
+                form.append(this.renderPartialField(fieldVal));
+            });
+        }
+        else{
+            form.append(this.renderPartialField(limitations, key));
+        }
+    }
+
+
+    renderPartialField(fieldVal, name = null){
+        if(name === null){
+            name = fieldVal.name;
+        }
+
+        let form_group = document.createElement("div");
+        form_group.classList.add("form-group");
+        
+        let el = null;
+
+        let fieldType = this.getLimitationFieldType(fieldVal);
+
+        form_group.appendChild(this.buildLabel(name));
+        if(fieldType[0] === "select"){
+            el = this.buildSelect(name, fieldVal);
+        }
+        else{
+            el = this.buildTextInput(name, fieldVal,fieldType[1]);
+        }
+        form_group.appendChild(el);
+
+        return form_group;
+    }
+
     getLimitationFieldType(limitation){
+
+        let fields = [];
         if(limitation.types)
             return ["select",""];
-        if(limitation.min && limitation.max)
-            return ["input", "number"];
         if(typeof limitation === "boolean")
             return ["input", "checkbox"]
+        if(limitation.min !== null && limitation.max !== null)
+            return ["input", "number"];
 
-        return ["input"];
+        return fields;
+    }
+
+    buildSelect(name,limitation){
+        let selectEl = document.createElement("select");
+        let options = limitation.types;
+        selectEl.setAttribute("name", name);
+        selectEl.classList.add("form-control")
+        options.forEach((option) => {
+            let optionEl = document.createElement("option");
+            optionEl.setAttribute("value", option);
+            optionEl.textContent = option;
+            selectEl.appendChild(optionEl);
+        });
+
+        return selectEl;
+    }
+
+    buildTextInput(name, limitation, type){
+        let textEl = document.createElement("input");
+        textEl.setAttribute("type", type);
+        textEl.setAttribute("name", name);
+        if(type === "number"){
+            textEl.setAttribute("min", limitation.min);
+            textEl.setAttribute("max", limitation.max);
+        }
+        textEl.classList.add("form-control");
+        return textEl;
+    }
+
+
+    buildLabel(name){
+        let label = document.createElement("label");
+        label.setAttribute("for", name);
+        if(this.labels[name]){
+            label.textContent = this.labels[name];
+        }
+
+        return label;
+    }
+    buildNumberInput(limitation){
+
     }
 }

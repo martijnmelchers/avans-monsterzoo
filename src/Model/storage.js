@@ -83,7 +83,7 @@ export class Storage {
     static placeMonster(monster) {
         const data = Storage.getObject();
 
-        data.available_monsters = data.available_monsters.filter(x => x.id !== monster.id);
+        data.available_monsters = data.available_monsters.filter(x => x.id != monster.id);
         data.placed_monsters.push(monster);
 
         Storage.saveObject(data);
@@ -93,6 +93,7 @@ export class Storage {
         const data = Storage.getObject();
 
         data.placed_monsters = data.placed_monsters.filter(m => m.id !== monster.id);
+        console.log(data.placed_monsters);
         data.placed_monsters.push(monster);
 
         Storage.saveObject(data);
@@ -106,11 +107,23 @@ export class Storage {
         Storage.saveObject(data);
     }
 
+    static getAvailableMonster(id) {
+        return Storage.getObject().available_monsters.find(x => x.id === id);
+    }
+
     static getAvailableMonsters() {
         return Storage.getObject().available_monsters;
     }
 
     static getPlacedMonsters(region) {
         return Storage.getObject().placed_monsters.filter(x => x.region === region);
+    }
+
+    static getPlacedMonster(region, id) {
+        return Storage.getObject().placed_monsters.find(x => x.region === region && x.id === id);
+    }
+
+    static getPlacedMonsterByCoords(region, x, y) {
+        return Storage.getObject().placed_monsters.find(m => m.region === region && m.x === m && m.y === y);
     }
 }

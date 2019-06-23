@@ -27,5 +27,12 @@ export class MonsterModel {
         this[property] = value;
     }
 
-
+    configure(properties){
+        for (const prop in properties) {
+            if (properties.hasOwnProperty(prop)) {
+                const element = properties[prop];
+                this[prop] = element;
+            }
+        }
+    }
 }

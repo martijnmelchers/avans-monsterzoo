@@ -146,14 +146,23 @@ export const Config = {
             },
             wind: {
                 arms: {
-                    min: 2,
-                    max: 2,
-                    types: [
-                        "Vleugels",
-                        "Klauw-vleugels"
-                    ]
+                   fields: [
+                        { 
+                            name: "arms",
+                            min: 2,
+                            max: 2,
+                        },
+                        {
+                            name: "armType",
+                            types: [
+                                "Vleugels",
+                                "Klauw-vleugels"
+                            ]
+                        }
+                    ], 
                 },
                 legs: {
+
                     fields:[
                         {
                             types: [
@@ -162,6 +171,7 @@ export const Config = {
                             ]
                         }
                     ]
+
                 },
                 eyes: {
                     min: 2,

@@ -71,4 +71,14 @@ export class GridView extends View {
     drag(ev) {
         ev.dataTransfer.setData("text/plain", ev.target.id);
     }
+
+
+    interact(x,y){
+        let tile = this.element.querySelector(`[data-x='${x}'][data-y='${y}']`);
+        let image = tile.firstChild;
+        image.classList.add("blurred");
+        setTimeout(() => {
+           image.classList.remove("blurred"); 
+        }, 1000);
+    }
 }

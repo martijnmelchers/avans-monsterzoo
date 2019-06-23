@@ -83,3 +83,14 @@ html, body  {
     width: 50px;
     border: 1px solid black;
 }
+
+
+@-webkit-keyframes image_blur {
+    0% { -webkit-filter: blur(0px);}
+    50% { -webkit-filter: blur(5px);}
+    100% { -webkit-filter: blur(0px);}
+}
+
+img.blurred {
+    -webkit-animation: image_blur 1s; 
+}

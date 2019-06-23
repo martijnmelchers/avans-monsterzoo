@@ -27,6 +27,8 @@ export class PageController extends Controller {
         this.view.render();
 
         this.onShowJungle();
+
+
     }
 
     initializeMonsterCreator() {
@@ -47,12 +49,15 @@ export class PageController extends Controller {
         const jungleElement = document.getElementById("jungleGrid");
         const jungleModel = new GridModel("Jungle", "Jungle");
 
+
         this.jungleView = new GridView(jungleElement);
 
         /* Create controller for the jungle */
         new GridController(jungleModel, this.jungleView).initialize();
 
         this.jungleView.render(jungleModel);
+
+
     }
 
     initializeSahara() {

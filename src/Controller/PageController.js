@@ -8,6 +8,7 @@ import { WeatherModel } from '../Model/weather';
 import { MonsterModel } from '../Model/monster';
 import { MonsterController } from '../Controller/MonsterController';
 import { MonsterView } from '../View/MonsterView';
+import { Storage } from "../Model/storage";
 
 export class PageController extends Controller {
     initialize() {
@@ -21,6 +22,7 @@ export class PageController extends Controller {
 
         this.initializeWeather();
         this.initializeMonsterCreator();
+        this.initializeAvailableMonsters();
 
         this.view.render();
 
@@ -75,6 +77,11 @@ export class PageController extends Controller {
         new GridController(northPoleModel, this.northPoleView).initialize();
 
         this.northPoleView.render(northPoleModel);
+    }
+
+    initializeAvailableMonsters() {
+        for (const monster of Storage.getAvailableMonsters())
+            this.monsterView.displayMonster(monster)
     }
 
 

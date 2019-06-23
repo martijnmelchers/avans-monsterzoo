@@ -2,10 +2,10 @@ import { View } from "./View";
 
 
 // Field Creator.
-class MonsterField extends HTMLElement{
-    constructor(type, options){
+class MonsterField extends HTMLElement {
+    constructor(type, options) {
         super();
-        var shadow = this.attachShadow({mode: 'open'});
+        var shadow = this.attachShadow({ mode: 'open' });
     }
 }
 
@@ -22,15 +22,15 @@ export class MonsterView extends View {
         this.init(container, 250, 250, "#fff");
 
 
-        if(model){
-            if(model.limitations){
+        if (model) {
+            if (model.limitations) {
                 this.setLimitations(model.limitations);
             }
         }
     }
 
 
-    setLimitations(limitations){
+    setLimitations(limitations) {
         //TODO: change fields based on limitations.
         for (const limitation in limitations) {
             if (limitations.hasOwnProperty(limitation)) {
@@ -52,7 +52,7 @@ export class MonsterView extends View {
 
     init(container, width, height, fillColor) {
 
-        if(this.canvas)
+        if (this.canvas)
             return;
 
         this.canvas = this.createCanvas(container, width, height);
@@ -113,7 +113,6 @@ export class MonsterView extends View {
     }
 
     displayMonster(monster) {
-        // do shit
         const element = document.getElementById("available-monsters");
         const image = document.createElement('img');
 
@@ -143,7 +142,7 @@ export class MonsterView extends View {
         }.bind(this);
     }
 
-    renderField(){
+    renderField() {
 
     }
 }

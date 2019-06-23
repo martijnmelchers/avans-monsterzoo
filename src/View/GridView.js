@@ -30,18 +30,18 @@ export class GridView extends View {
     }
 
     drop(ev) {
-        console.log('reeee drop!');
         ev.preventDefault();
         const data = ev.dataTransfer.getData("text/plain");
 
         if(data === null || data === "") return;
 
-        ev.target.data["x"]
+        const region = ev.target.parentElement.dataset.region;
+
+
         ev.target.appendChild(document.getElementById(data));
     }
 
     allowDrop(ev) {
-        console.log('reeeee drag over!');
         ev.preventDefault();
         ev.dataTransfer.dropEffect = "move";
     }

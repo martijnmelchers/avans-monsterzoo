@@ -83,9 +83,34 @@ export class Storage {
     static placeMonster(monster) {
         const data = Storage.getObject();
 
-        data.available_monsters.filter(x => x.drawing !== monster.drawing);
+        data.available_monsters = data.available_monsters.filter(x => x.id !== monster.id);
         data.placed_monsters.push(monster);
 
         Storage.saveObject(data);
+    }
+
+    static moveMonster(monster) {
+        const data = Storage.getObject();
+
+        data.placed_monsters = data.placed_monsters.filter(m => m.id !== monster.id);
+        data.placed_monsters.push(monster);
+
+        Storage.saveObject(data);
+    }
+
+    static removeMonster(monster) {
+        const data = Storage.getObject();
+
+        data.placed_monsters = data.placed_monsters.filter(m => m.id !== monster.id);
+
+        Storage.saveObject(data);
+    }
+
+    static getAvailableMonsters() {
+        return Storage.getObject().available_monsters;
+    }
+
+    static getPlacedMonsters(region) {
+        return Storage.getObject().placed_monsters.filter(x => x.region === region);
     }
 }

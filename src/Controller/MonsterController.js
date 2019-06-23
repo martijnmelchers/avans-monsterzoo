@@ -1,8 +1,7 @@
 import { Controller } from "./Controller";
 import { MonsterModel } from "../Model/monster";
 import { View } from "../View/View";
-import { Storage} from "../Model/storage";
-import {MonsterModel} from "../Model/monster";
+import { Storage } from "../Model/storage";
 import { Config } from "../Model/config";
 
 export class MonsterController extends Controller {
@@ -13,7 +12,7 @@ export class MonsterController extends Controller {
         let config = {
             data: {},
             restrictions: {},
-        }
+        };
 
         this.view.render();
     }
@@ -37,13 +36,13 @@ export class MonsterController extends Controller {
         this.view.displayMonster(monster);
     }
 
-    onElementChange(e){
+    onElementChange(e) {
         const index = e.target.selectedIndex;
         const value = e.target.options[index].value;
 
-        let data =  {
+        let data = {
             limitations: Config.monsters.types[value]
-        }
+        };
 
         this.view.render(data)
     }

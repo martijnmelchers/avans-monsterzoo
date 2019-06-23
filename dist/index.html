@@ -7,7 +7,14 @@
 </head>
 <body>
 
-<div style="width:50px;height:50px" draggable="true" ondragstart="GriedView.drag(event)">Bruh</div>
+<div class="monster-editor" id="monster-editor">
+
+    <button></button>
+</div>
+
+<div id="bruh" draggable="true" ondragstart="drag(event)">
+    bruh cutaro
+</div>
 
 <div id="page-wrapper" class="page-wrapper">
     <div id="weather" class="weather"></div>
@@ -20,5 +27,12 @@
     <button id="showNorthPole">Show northpole</button>
 </div>
 <script type="text/javascript" src="bundle.js"></script>
+<script type="text/javascript">
+    function drag(ev) {
+        console.log("Help I am being dragged monkaW");
+
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+    }
+</script>
 </body>
 </html>

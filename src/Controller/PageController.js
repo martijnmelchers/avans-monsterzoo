@@ -73,15 +73,15 @@ export class PageController extends Controller {
     }
 
     initializeNorthPole() {
-        const northPoleElement = document.getElementById("northPoleGrid");
-        const northPoleModel = new GridModel("Noordpool", "NorthPole");
+        const northpoleElement = document.getElementById("northpoleGrid");
+        const northpoleModel = new GridModel("Noordpool", "NorthPole");
 
-        this.northPoleView = new GridView(northPoleElement);
+        this.northpoleView = new GridView(northpoleElement);
 
         /* Create controller for the north pole */
-        new GridController(northPoleModel, this.northPoleView).initialize();
+        new GridController(northpoleModel, this.northpoleView).initialize();
 
-        this.northPoleView.render(northPoleModel);
+        this.northpoleView.render(northpoleModel);
     }
 
     initializeAvailableMonsters() {
@@ -106,7 +106,7 @@ export class PageController extends Controller {
 
     onShowNorthPole() {
         this.resetVisible();
-        this.northPoleView.display = true;
+        this.northpoleView.display = true;
 
         this.weatherController.showWeather("Longyearbyen");
     }
@@ -114,6 +114,6 @@ export class PageController extends Controller {
     resetVisible() {
         this.jungleView.display = false;
         this.saharaView.display = false;
-        this.northPoleView.display = false
+        this.northpoleView.display = false
     }
 }

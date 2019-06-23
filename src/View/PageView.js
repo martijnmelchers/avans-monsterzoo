@@ -4,11 +4,11 @@ export class PageView extends View {
     render(model) {
         let jungleEl = this.element.querySelector("#showJungle");
         let saharaEl = this.element.querySelector("#showSahara");
-        let northPoleEL = this.element.querySelector("#showNorthPole");
+        let northpoleEL = this.element.querySelector("#showNorthPole");
 
         jungleEl.addEventListener('click', this.onShowJungle);
         saharaEl.addEventListener('click', this.onShowSahara);
-        northPoleEL.addEventListener('click', this.onShowNorthPole);
+        northpoleEL.addEventListener('click', this.onShowNorthPole);
     }
 
 }

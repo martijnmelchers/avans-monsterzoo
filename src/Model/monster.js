@@ -1,4 +1,4 @@
-class MonsterModel {
+export class MonsterModel {
     constructor(){
         this.name = "Monster";
         this.element = "Monster";
@@ -27,11 +27,4 @@ class MonsterModel {
             }
         }
     }
-}
-
-
-class MonsterModel {
-    createMonster(){
-        
-    }  
 }

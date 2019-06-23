@@ -7,22 +7,75 @@
 </head>
 <body>
 
-<div class="monster-editor" id="monster-editor">
 
-    <button></button>
-</div>
 
 <div id="bruh" draggable="true" ondragstart="drag(event)">
     bruh cutaro
 </div>
 
 <div id="page-wrapper" class="page-wrapper">
-    <div class="half">
-        <div class="monster-creator">
-            
+    <div class="partial quarter">
+        <div id="monster-creator" class="monster-creator">
+            <form id="monsterCreateForm">
+                <b>General</b>
+                <br>
+                <label for="name">Monster name</label>
+                <input type="text" name="name" id="monsterName">
+                <br>
+
+                <hr>
+                <b>Arms</b> <br>
+                <label for="arms">Arm amount</label>
+                <input type="number" name="arms" id="monsterArms" min="" max="">
+                <br>
+                <label for="armType">Arm type</label>
+                <select name="armType" id="monsterArmType">
+                    <option value="Tentacles">Tentacles</option>
+                    <option value="Fins">Fins</option>
+                </select>
+                <br>
+                <hr>
+                <b>Legs</b>
+                <br>
+                <label for="legs">Leg amount</label>
+                <input type="number" name="legs" id="armLegs">
+                <br>
+
+                <label for="legType">Leg type</label>
+                <select name="legType" id="monsterLegType">
+                    <option value="Leg1">Leg1</option>
+                </select>
+                <br>
+                <hr>
+                <b>Cosmetics</b><br>
+                <label for="furType">Fur type</label>
+                <select name="furType" id="monsterFurType">
+                        <option value="fur1">fur1</option>
+                </select>
+                <br>
+                <label for="furType">Color</label>
+                <select name="color" id="monsterColor">
+                        <option value="red">Red</option>
+                </select>    
+                <br>
+                <label for="eyes">Eye amount</label>
+                <input type="number" name="eyes" id="monsterEyes">
+                <br>
+                <hr>
+                <b>Moves</b>
+                <br>
+                <label for="canFly">Can Fly?</label>
+                <input type="checkbox" name="canFly" id="monsterCanFly">
+                <br>
+                <label for="canSwim">Can Swim?</label>
+                <input type="checkbox" name="canFly" id="monsterCanSwim">
+                <br>
+                <hr>
+                <button id="saveMonster" type="submit">Save monster</button>
+            </form>
         </div>
     </div>
-    <div class="half">
+    <div class="partial half">
         <button id="showJungle">Show jungle</button>
         <button id="showSahara">Show sahara</button>
         <button id="showNorthPole">Show northpole</button>

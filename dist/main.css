@@ -1,8 +1,12 @@
+
+html, body  {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
 .zoo {
 
 }
-
-
 .configurator {
     height: 500px;
     border: 1px solid black;
@@ -42,9 +46,24 @@
     width: 100%;
 }
 
-.half {
-    width: 50%;
+
+.partial {
     height: 100vh;
     padding: 0;
     margin: 0;
+    float: left;
+}
+
+.partial.quarter {
+    width: 25%;
+}
+.partial.half {
+    width: 50%;
+}
+
+
+
+.monster-creator {
+    height: 60%;
+    border: 1px solid black;
 }

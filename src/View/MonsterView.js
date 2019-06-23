@@ -1,14 +1,43 @@
 import { View } from "./View";
 
+
+// Field Creator.
+class MonsterField extends HTMLElement{
+    constructor(type, options){
+        super();
+        var shadow = this.attachShadow({mode: 'open'});
+    }
+}
+
 export class MonsterView extends View {
-    render() {
+    render(model) {
         let monsterForm = this.element.querySelector("#monsterCreateForm");
         monsterForm.addEventListener("submit", this.onMonsterCreate);
+
+        let monsterType = this.element.querySelector("#monsterType");
+        monsterType.addEventListener("change", this.onElementChange);
 
 
         let container = this.element.querySelector("#monsterCanvas");
         this.init(container, 100, 100, "#ddd");
 
+
+        if(model){
+            if(model.limitations){
+                this.setLimitations(model.limitations);
+            }
+        }
+    }
+
+
+    setLimitations(limitations){
+        //TODO: change fields based on limitations.
+        for (const limitation in limitations) {
+            if (limitations.hasOwnProperty(limitation)) {
+                const element = limitations[limitation];
+                console.log(limitation, element);
+            }
+        }
     }
 
     createCanvas(parent, width, height) {
@@ -22,6 +51,10 @@ export class MonsterView extends View {
     }
 
     init(container, width, height, fillColor) {
+
+        if(this.canvas)
+            return;
+
         this.canvas = this.createCanvas(container, width, height);
         var ctx = this.canvas.context;
         // define a custom fillCircle method
@@ -33,11 +66,11 @@ export class MonsterView extends View {
             this.fill();
         };
 
-
         ctx.clearTo = function (fillColor) {
             ctx.fillStyle = fillColor;
             ctx.fillRect(0, 0, width, height);
         };
+
         ctx.clearTo(fillColor || "#ddd");
 
         // bind mouse events
@@ -91,5 +124,9 @@ export class MonsterView extends View {
             const ctx = this.canvas.context;
             ctx.drawImage(img, 0, 0);
         }.bind(this);
+    }
+
+    renderField(){
+        
     }
 }

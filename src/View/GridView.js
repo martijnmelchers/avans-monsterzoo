@@ -1,4 +1,5 @@
 import { View } from './View';
+import { MonsterView } from "./MonsterView";
 
 export class GridView extends View {
     set display(setDisplay) {
@@ -31,22 +32,23 @@ export class GridView extends View {
     }
 
     addMonsters() {
-
-
         for (let e = 0; e < this.model.rows; e++) {
             for (let a = 0; a < this.model.columns; a++) {
-                console.log(e,a);
                 const monster = this.model.getMonster(e, a);
 
                 if (!monster) continue;
 
-                console.log('re');
                 const image = document.createElement('img');
 
                 image.id = monster.id;
                 image.src = monster.drawing;
                 image.draggable = true;
-                image.addEventListener('dragstart', this.drag);
+                image.dataset.toggle = "modal";
+                image.dataset.target = "#infoModal";
+
+                image.addEventListener('dragstart', MonsterView.drag);
+                image.addEventListener('click', MonsterView.playSound);
+                image.addEventListener('click', MonsterView.changeInfo);
 
                 this.element.querySelector(`[data-x='${e}'][data-y='${a}']`).appendChild(image);
             }
@@ -54,6 +56,10 @@ export class GridView extends View {
 
 
 
+    }
+
+    static removeMonster(region, id) {
+        document.getElementById(`${region.toLowerCase()}Grid`).querySelector(`[id='${id}']`).remove();
     }
 
     allowDrop(ev) {
@@ -66,9 +72,5 @@ export class GridView extends View {
             tile.addEventListener('drop', this.drop);
             tile.addEventListener('dragover', this.allowDrop)
         }
-    }
-
-    drag(ev) {
-        ev.dataTransfer.setData("text/plain", ev.target.id);
     }
 }

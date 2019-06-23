@@ -93,16 +93,15 @@ export class Storage {
         const data = Storage.getObject();
 
         data.placed_monsters = data.placed_monsters.filter(m => m.id !== monster.id);
-        console.log(data.placed_monsters);
         data.placed_monsters.push(monster);
 
         Storage.saveObject(data);
     }
 
-    static removeMonster(monster) {
+    static removeMonster(region, id) {
         const data = Storage.getObject();
 
-        data.placed_monsters = data.placed_monsters.filter(m => m.id !== monster.id);
+        data.placed_monsters = data.placed_monsters.filter(m => m.id !== id && m.region !== id);
 
         Storage.saveObject(data);
     }
@@ -124,6 +123,6 @@ export class Storage {
     }
 
     static getPlacedMonsterByCoords(region, x, y) {
-        return Storage.getObject().placed_monsters.find(m => m.region === region && m.x === m && m.y === y);
+        return Storage.getObject().placed_monsters.find(m => m.region === region && m.x == m && m.y == y);
     }
 }

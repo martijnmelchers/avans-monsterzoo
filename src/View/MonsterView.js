@@ -1,8 +1,37 @@
 import { View } from "./View";
 
-
+import { Storage } from "../Model/storage";
 
 export class MonsterView extends View {
+    static drag(ev) {
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+    }
+
+    static playSound() {
+        new Audio('../ding.wav').play();
+    }
+
+    static changeInfo(ev) {
+        const modal = document.getElementById("infoModal");
+        const monster = Storage.getPlacedMonster(ev.target.parentElement.parentElement.dataset.region, parseInt(ev.target.id));
+
+        if(!monster) return;
+
+        modal.querySelector("#infoArmType").innerHTML = monster.armType;
+        modal.querySelector("#infoArms").innerHTML = monster.numArms;
+        modal.querySelector("#infoLegType").innerHTML = monster.legType;
+        modal.querySelector("#infoLegs").innerHTML = monster.numLegs;
+        modal.querySelector("#infoFurType").innerHTML = monster.furType;
+        modal.querySelector("#infoFurColor").innerHTML = monster.color;
+        modal.querySelector("#infoEyes").innerHTML = monster.eyes;
+        modal.querySelector("#infoType").innerHTML = monster.element;
+        modal.querySelector("#infoCanFly").innerHTML = monster.canFly ? "Ja" : "Nee";
+        modal.querySelector("#infoCanSwim").innerHTML = monster.canSwim ? "Ja" : "Nee";
+        modal.querySelector("#infoImage").src = monster.drawing;
+        modal.querySelector('#deleteButton').dataset.id = monster.id;
+        modal.querySelector('#deleteButton').dataset.region = monster.region;
+    }
+
     render(model) {
         let monsterForm = this.element.querySelector("#monsterCreateForm");
         monsterForm.addEventListener("submit", this.onMonsterCreate);
@@ -14,6 +43,8 @@ export class MonsterView extends View {
         let container = this.element.querySelector("#monsterCanvas");
         this.init(container, 250, 250, "#fff");
 
+        document.getElementById("deleteButton").addEventListener('click', this.onDeleteClick);
+
 
         if (model) {
             if (model.limitations) {
@@ -21,7 +52,6 @@ export class MonsterView extends View {
             }
         }
     }
-
 
     setLimitations(limitations) {
         //TODO: change fields based on limitations.
@@ -87,7 +117,6 @@ export class MonsterView extends View {
 
         this.canvas.node.onmousedown = (e) => {
             this.canvas.isDrawing = true;
-            console.log("Drawing?");
         };
         this.canvas.node.onmouseup = (e) => {
             this.canvas.isDrawing = false;
@@ -96,6 +125,12 @@ export class MonsterView extends View {
         this.element.querySelector("#eraseButton").addEventListener('click', (e) => {
             this.canvas.erase = !this.canvas.erase;
         });
+
+        this.element.querySelector("#clearCanvas").addEventListener('click', (e) => {
+            ctx.clearTo("#fff");
+        });
+
+
     }
 
     getMousePos(canvas, evt) {
@@ -114,13 +149,14 @@ export class MonsterView extends View {
 
         image.src = monster.drawing;
         image.draggable = true;
-        image.addEventListener('dragstart', this.drag);
+        image.dataset.toggle = "modal";
+        image.dataset.target = "#infoModal";
+
+        image.addEventListener('dragstart', MonsterView.drag);
+        image.addEventListener('click', MonsterView.playSound);
+        image.addEventListener('click', MonsterView.changeInfo);
 
         element.appendChild(image);
-    }
-
-    drag(ev) {
-        ev.dataTransfer.setData("text/plain", ev.target.id);
     }
 
     exportCanvas() {
@@ -138,24 +174,24 @@ export class MonsterView extends View {
 
 
     // Renders indivudual monster fields
-    renderField(limitations, key){
+    renderField(limitations, key) {
         var group = this.element.querySelector(`input[name='${key}']`);
-        if(group !== null){
+        if (group !== null) {
             let shadow = group.parentNode;
-            const shadowEl = shadow.attachShadow({mode: 'open'});
+            const shadowEl = shadow.attachShadow({ mode: 'open' });
             let el = document.createElement(this.getLimitationFieldType(limitations)[0]);
             shadowEl.appendChild(el);
         }
     }
 
 
-    getLimitationFieldType(limitation){
-        if(limitation.types)
-            return ["select",""];
-        if(limitation.min && limitation.max)
+    getLimitationFieldType(limitation) {
+        if (limitation.types)
+            return ["select", ""];
+        if (limitation.min && limitation.max)
             return ["input", "number"];
-        if(typeof limitation === "boolean")
-            return ["input", "checkbox"]
+        if (typeof limitation === "boolean")
+            return ["input", "checkbox"];
 
         return ["input"];
     }

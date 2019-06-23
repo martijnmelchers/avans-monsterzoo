@@ -2,10 +2,19 @@ import { Controller } from "./Controller";
 import { MonsterModel } from "../Model/monster";
 import { View } from "../View/View";
 import { Storage} from "../Model/storage";
+import {MonsterModel} from "../Model/monster";
+import { Config } from "../Model/config";
 
 export class MonsterController extends Controller {
     initialize() {
         this.view.onMonsterCreate = this.onMonsterCreate.bind(this);
+        this.view.onElementChange = this.onElementChange.bind(this);
+
+        let config = {
+            data: {},
+            restrictions: {},
+        }
+
         this.view.render();
     }
 
@@ -26,5 +35,16 @@ export class MonsterController extends Controller {
         View.scrollToTop();
 
         this.view.displayMonster(monster);
+    }
+
+    onElementChange(e){
+        const index = e.target.selectedIndex;
+        const value = e.target.options[index].value;
+
+        let data =  {
+            limitations: Config.monsters.types[value]
+        }
+
+        this.view.render(data)
     }
 }

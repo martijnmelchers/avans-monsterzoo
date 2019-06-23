@@ -1,6 +1,10 @@
 import { View } from './View';
 
 export class GridView extends View {
+    set display(setDisplay) {
+        setDisplay ? this.element.classList.toggle("visible") : this.element.classList.remove("visible");
+    }
+
     render(model) {
         this.model = model;
         this.element.innerHTML = this.renderTiles().join("");
@@ -25,15 +29,11 @@ export class GridView extends View {
         return `<div class="zoo-tile ${this.model.isDisabled(x, y) ? "disabled" : ""}" data-x="${x}" data-y="${y}"></div>`;
     }
 
-    set display(setDisplay) {
-        setDisplay ? this.element.classList.toggle("visible") : this.element.classList.remove("visible");
-    }
-
     drop(ev) {
         ev.preventDefault();
         const data = ev.dataTransfer.getData("text/plain");
 
-        if(data === null || data === "") return;
+        if (data === null || data === "") return;
 
         const region = ev.target.parentElement.dataset.region;
 
@@ -47,7 +47,7 @@ export class GridView extends View {
     }
 
     createListenerEvents() {
-        for(const tile of this.element.querySelectorAll(".zoo-tile:not(.disabled)")) {
+        for (const tile of this.element.querySelectorAll(".zoo-tile:not(.disabled)")) {
             tile.addEventListener('drop', this.drop);
             tile.addEventListener('dragover', this.allowDrop)
         }

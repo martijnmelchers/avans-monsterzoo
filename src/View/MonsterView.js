@@ -1,13 +1,6 @@
 import { View } from "./View";
 
 
-// Field Creator.
-class MonsterField extends HTMLElement {
-    constructor(type, options) {
-        super();
-        var shadow = this.attachShadow({ mode: 'open' });
-    }
-}
 
 export class MonsterView extends View {
     render(model) {
@@ -35,7 +28,8 @@ export class MonsterView extends View {
         for (const limitation in limitations) {
             if (limitations.hasOwnProperty(limitation)) {
                 const element = limitations[limitation];
-                console.log(limitation, element);
+
+                this.renderField(element, limitation);
             }
         }
     }
@@ -142,7 +136,27 @@ export class MonsterView extends View {
         }.bind(this);
     }
 
-    renderField() {
 
+    // Renders indivudual monster fields
+    renderField(limitations, key){
+        var group = this.element.querySelector(`input[name='${key}']`);
+        if(group !== null){
+            let shadow = group.parentNode;
+            const shadowEl = shadow.attachShadow({mode: 'open'});
+            let el = document.createElement(this.getLimitationFieldType(limitations)[0]);
+            shadowEl.appendChild(el);
+        }
+    }
+
+
+    getLimitationFieldType(limitation){
+        if(limitation.types)
+            return ["select",""];
+        if(limitation.min && limitation.max)
+            return ["input", "number"];
+        if(typeof limitation === "boolean")
+            return ["input", "checkbox"]
+
+        return ["input"];
     }
 }

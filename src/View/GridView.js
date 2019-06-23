@@ -4,6 +4,8 @@ export class GridView extends View {
     render(model) {
         this.model = model;
         this.element.innerHTML = this.renderTiles().join("");
+
+        this.createListenerEvents();
     }
 
     renderTiles() {
@@ -20,20 +22,30 @@ export class GridView extends View {
     }
 
     createTile(x, y) {
-        return `<div class="zoo-tile ${this.model.isDisabled(x, y) ? "disabled" : ""}" data-x="${x}" data-y="${y}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>`;
+        return `<div class="zoo-tile ${this.model.isDisabled(x, y) ? "disabled" : ""}" data-x="${x}" data-y="${y}"></div>`;
     }
 
     set display(setDisplay) {
-        setDisplay ? this.element.classList.add("visible") : this.element.classList.remove("visible");
+        setDisplay ? this.element.classList.toggle("visible") : this.element.classList.remove("visible");
     }
 
-    static drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-    }
-
-    static drop(ev) {
+    drop(ev) {
+        console.log('reeee drop!');
         ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
+        const data = ev.dataTransfer.getData("text/plain");
         ev.target.appendChild(document.getElementById(data));
+    }
+
+    allowDrop(ev) {
+        console.log('reeeee drag over!');
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "move";
+    }
+
+    createListenerEvents() {
+        for(const tile of this.element.querySelectorAll(".zoo-tile:not(.disabled)")) {
+            tile.addEventListener('drop', this.drop);
+            tile.addEventListener('dragover', this.allowDrop)
+        }
     }
 }

@@ -21,8 +21,10 @@ export class PageController extends Controller {
 
         this.initializeWeather();
         this.initializeMonsterCreator();
+
         this.view.render();
-        this.resetVisible();
+
+        this.onShowJungle();
     }
 
     initializeMonsterCreator(){

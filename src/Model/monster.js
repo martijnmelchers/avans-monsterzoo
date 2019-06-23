@@ -1,5 +1,6 @@
 export class MonsterModel {
     constructor() {
+        this.id = 0;
         this.name = "Monster";
         this.element = "Monster";
         this.furType = "";
@@ -8,6 +9,9 @@ export class MonsterModel {
         this.canSwim = false;
         this.canFly = true;
         this.color = "";
+        this.region = "";
+        this.x = 0;
+        this.y = 0;
     }
 
     screech() {

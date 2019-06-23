@@ -7,7 +7,7 @@ export class MonsterView extends View {
 
 
         let container = this.element.querySelector("#monsterCanvas");
-        this.init(container, 100, 100, "#ddd");
+        this.init(container, 250, 250, "#fff");
 
     }
 
@@ -23,7 +23,7 @@ export class MonsterView extends View {
 
     init(container, width, height, fillColor) {
         this.canvas = this.createCanvas(container, width, height);
-        var ctx = this.canvas.context;
+        const ctx = this.canvas.context;
         // define a custom fillCircle method
         ctx.fillCircle = function (x, y, radius, fillColor) {
             this.fillStyle = fillColor;
@@ -38,7 +38,7 @@ export class MonsterView extends View {
             ctx.fillStyle = fillColor;
             ctx.fillRect(0, 0, width, height);
         };
-        ctx.clearTo(fillColor || "#ddd");
+        ctx.clearTo(fillColor || "#fff");
 
         // bind mouse events
         this.canvas.node.onmousemove = (e) => {
@@ -55,7 +55,7 @@ export class MonsterView extends View {
             if (!this.canvas.erase) {
                 ctx.fillCircle(x, y, radius, fillColor);
             } else {
-                ctx.fillCircle(x, y, radius + 2, "#ddd");
+                ctx.fillCircle(x, y, radius + 2, "#fff");
             }
         };
 
@@ -78,6 +78,24 @@ export class MonsterView extends View {
             x: evt.clientX - rect.left,
             y: evt.clientY - rect.top
         };
+    }
+
+    displayMonster(monster) {
+        // do shit
+        const element = document.getElementById("available-monsters");
+        const image = document.createElement('img');
+
+        image.id = monster.id;
+
+        image.src = monster.drawing;
+        image.draggable = true;
+        image.addEventListener('dragstart', this.drag);
+
+        element.appendChild(image);
+    }
+
+    drag(ev) {
+        ev.dataTransfer.setData("text/plain", ev.target.id);
     }
 
     exportCanvas() {

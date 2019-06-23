@@ -33,6 +33,10 @@ export class GridView extends View {
         console.log('reeee drop!');
         ev.preventDefault();
         const data = ev.dataTransfer.getData("text/plain");
+
+        if(data === null || data === "") return;
+
+        ev.target.data["x"]
         ev.target.appendChild(document.getElementById(data));
     }
 

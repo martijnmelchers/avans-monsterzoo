@@ -4,11 +4,15 @@ export class View {
         this.display = true;
     }
 
-    render(model) {
-        //
-    }
-
     set display(setDisplay) {
 
+    }
+
+    static scrollToTop() {
+        window.scroll({ top: 0, behavior: 'smooth' })
+    }
+
+    render(model) {
+        //
     }
 }

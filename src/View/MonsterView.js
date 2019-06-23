@@ -28,7 +28,7 @@ export class MonsterView extends View {
         modal.querySelector("#infoCanFly").innerHTML = monster.canFly ? "Ja" : "Nee";
         modal.querySelector("#infoCanSwim").innerHTML = monster.canSwim ? "Ja" : "Nee";
         modal.querySelector("#infoImage").src = monster.drawing;
-        MonsterView.getMonsterBuffs(ev.target.parentElement.parentElement.dataset.region, monster.element).then(x => modal.querySelector("#buffs").innerHTML = x.join("<br>"))
+        modal.querySelector("#buffs").innerHTML = MonsterView.getMonsterBuffs(ev.target.parentElement.parentElement.dataset.region, monster.element).join("<br>");
         modal.querySelector('#deleteButton').dataset.id = monster.id;
         modal.querySelector('#deleteButton').dataset.region = monster.region;
     }
@@ -56,6 +56,8 @@ export class MonsterView extends View {
                     buffs.push("-10% door Sahara regio");
                 break;
         }
+
+        return buffs;
     }
 
     render(model) {

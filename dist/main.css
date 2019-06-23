@@ -37,3 +37,14 @@
     background: red;
     background-image: url("../water.png");
 }
+
+.page-wrapper {
+    width: 100%;
+}
+
+.half {
+    width: 50%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}

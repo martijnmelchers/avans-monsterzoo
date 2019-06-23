@@ -1,4 +1,4 @@
-class Monster {
+class MonsterModel {
     constructor(){
         this.name = "Monster";
         this.element = "Monster";

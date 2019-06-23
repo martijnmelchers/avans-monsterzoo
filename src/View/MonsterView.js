@@ -1,6 +1,7 @@
 import { View } from "./View";
 
 import { Storage } from "../Model/storage";
+import { WeatherModel } from "../Model/weather";
 
 export class MonsterView extends View {
     static drag(ev) {
@@ -15,7 +16,7 @@ export class MonsterView extends View {
         const modal = document.getElementById("infoModal");
         const monster = Storage.getPlacedMonster(ev.target.parentElement.parentElement.dataset.region, parseInt(ev.target.id));
 
-        if(!monster) return;
+        if (!monster) return;
 
         modal.querySelector("#infoArmType").innerHTML = monster.armType;
         modal.querySelector("#infoArms").innerHTML = monster.numArms;
@@ -27,8 +28,34 @@ export class MonsterView extends View {
         modal.querySelector("#infoCanFly").innerHTML = monster.canFly ? "Ja" : "Nee";
         modal.querySelector("#infoCanSwim").innerHTML = monster.canSwim ? "Ja" : "Nee";
         modal.querySelector("#infoImage").src = monster.drawing;
+        MonsterView.getMonsterBuffs(ev.target.parentElement.parentElement.dataset.region, monster.element).then(x => modal.querySelector("#buffs").innerHTML = x.join("<br>"))
         modal.querySelector('#deleteButton').dataset.id = monster.id;
         modal.querySelector('#deleteButton').dataset.region = monster.region;
+    }
+
+    static getMonsterBuffs(region, element) {
+        const buffs = [];
+
+        switch (region) {
+            case "Jungle":
+                if (element == "earth" || element == "water" || element == "wind")
+                    buffs.push("+10% door Jungle regio");
+                else
+                    buffs.push("-10% door Jungle regio");
+                break;
+            case "NorthPole":
+                if (element == "water" || element == "wind")
+                    buffs.push("+10% door Noordpool regio");
+                else
+                    buffs.push("-10% door Noordpool regio");
+                break;
+            case "Sahara":
+                if (element == "earth" || element == "fire")
+                    buffs.push("+10% door Sahara regio");
+                else
+                    buffs.push("-10% door Sahara regio");
+                break;
+        }
     }
 
     render(model) {
@@ -68,12 +95,10 @@ export class MonsterView extends View {
 
     }
 
-    onDragOver(ev){
+    onDragOver(ev) {
         ev.preventDefault();
         ev.dataTransfer.dropEffect = "move";
     }
-
-
 
     setLimitations(limitations) {
         //TODO: change fields based on limitations.
@@ -197,7 +222,7 @@ export class MonsterView extends View {
         }.bind(this);
     }
 
-    resetFields(){
+    resetFields() {
         let form = this.element.querySelector("#form-dynamic");
 
         while (form.firstChild) {
@@ -205,24 +230,21 @@ export class MonsterView extends View {
         }
     }
 
-
     // Renders indivudual monster fields
-    renderField(limitations, key){
+    renderField(limitations, key) {
         let form = this.element.querySelector("#form-dynamic");
 
-        if(limitations.fields){
+        if (limitations.fields) {
             limitations.fields.forEach((fieldVal) => {
                 form.append(this.renderPartialField(fieldVal));
             });
-        }
-        else{
+        } else {
             form.append(this.renderPartialField(limitations, key));
         }
     }
 
-
-    renderPartialField(fieldVal, name = null){
-        if(name === null){
+    renderPartialField(fieldVal, name = null) {
+        if (name === null) {
             name = fieldVal.name;
         }
 
@@ -234,31 +256,30 @@ export class MonsterView extends View {
         let fieldType = this.getLimitationFieldType(fieldVal);
 
         form_group.appendChild(this.buildLabel(name));
-        if(fieldType[0] === "select"){
+        if (fieldType[0] === "select") {
             el = this.buildSelect(name, fieldVal);
-        }
-        else{
-            el = this.buildTextInput(name, fieldVal,fieldType[1]);
+        } else {
+            el = this.buildTextInput(name, fieldVal, fieldType[1]);
         }
         form_group.appendChild(el);
 
         return form_group;
     }
 
-    getLimitationFieldType(limitation){
+    getLimitationFieldType(limitation) {
 
         let fields = [];
-        if(limitation.types)
-            return ["select",""];
-        if(typeof limitation === "boolean")
+        if (limitation.types)
+            return ["select", ""];
+        if (typeof limitation === "boolean")
             return ["input", "checkbox"]
-        if(limitation.min !== null && limitation.max !== null)
+        if (limitation.min !== null && limitation.max !== null)
             return ["input", "number"];
 
         return fields;
     }
 
-    buildSelect(name,limitation){
+    buildSelect(name, limitation) {
         let selectEl = document.createElement("select");
         let options = limitation.types;
         selectEl.setAttribute("name", name);
@@ -273,11 +294,11 @@ export class MonsterView extends View {
         return selectEl;
     }
 
-    buildTextInput(name, limitation, type){
+    buildTextInput(name, limitation, type) {
         let textEl = document.createElement("input");
         textEl.setAttribute("type", type);
         textEl.setAttribute("name", name);
-        if(type === "number"){
+        if (type === "number") {
             textEl.setAttribute("min", limitation.min);
             textEl.setAttribute("max", limitation.max);
         }
@@ -285,17 +306,17 @@ export class MonsterView extends View {
         return textEl;
     }
 
-
-    buildLabel(name){
+    buildLabel(name) {
         let label = document.createElement("label");
         label.setAttribute("for", name);
-        if(this.labels[name]){
+        if (this.labels[name]) {
             label.textContent = this.labels[name];
         }
 
         return label;
     }
-    buildNumberInput(limitation){
+
+    buildNumberInput(limitation) {
 
     }
 }

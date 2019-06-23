@@ -74,10 +74,6 @@ export class GridView extends View {
         }
     }
 
-    drag(ev) {
-        ev.dataTransfer.setData("text/plain", ev.target.id);
-    }
-
 
     interact(x,y){
         let tile = this.element.querySelector(`[data-x='${x}'][data-y='${y}']`);

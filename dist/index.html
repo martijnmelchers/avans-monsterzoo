@@ -4,27 +4,117 @@
     <meta charset="UTF-8">
     <title>Webpack App</title>
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-<div class="monster-editor" id="monster-editor">
-
-    <button></button>
-</div>
 
 <div id="bruh" draggable="true" ondragstart="drag(event)">
     bruh cutaro
 </div>
 
-<div id="page-wrapper" class="page-wrapper">
-    <button id="showJungle" class="btn btn-info">Show jungle</button>
-    <button id="showSahara"  class="btn btn-info">Show sahara</button>
-    <button id="showNorthPole"  class="btn btn-info">Show northpole</button>
-    <div id="weather" class="weather"></div>
-    <div id="jungleGrid" class="grid-container"></div>
-    <div id="saharaGrid" class="grid-container"></div>
-    <div id="northPoleGrid" class="grid-container"></div>
+<div id="page-wrapper" class="container">
+    <div class="row">
+        <div class="col-4">
+            <div id="monster-creator">
+                <form id="monsterCreateForm">
+
+                    <h4>Algemeen</h4>
+                    <div class="form-group">
+                        <label for="monsterName">Monster naam</label>
+                        <input type="text" name="name" id="monsterName" class="form-control">
+                    </div>
+
+                    <hr>
+
+                    <h4>Armen</h4>
+
+                    <div class="form-group">
+
+                        <label for="monsterArms">Aantal armen</label>
+                        <input type="number" name="arms" id="monsterArms" min="" max="" class="form-control">
+
+                        <label for="monsterArmType">Type armen</label>
+                        <select name="armType" id="monsterArmType" class="form-control">
+                            <option value="Tentacles">Tentacles</option>
+                            <option value="Fins">Fins</option>
+                        </select>
+                    </div>
+
+                    <hr>
+
+                    <h4>Benen</h4>
+
+                    <div class="form-group">
+
+                        <label for="armLegs">Aantal benen</label>
+                        <input type="number" name="legs" id="armLegs" class="form-control">
+
+                        <label for="monsterLegType">Type been</label>
+                        <select name="legType" id="monsterLegType" class="form-control">
+                            <option value="Leg1">Leg1</option>
+                        </select>
+                    </div>
+
+                    <hr>
+
+                    <h4>Cosmetica</h4>
+
+                    <div class="form-group">
+
+                        <label for="monsterFurType">Type vacht</label>
+                        <select name="furType" id="monsterFurType" class="form-control">
+                            <option value="fur1">fur1</option>
+                        </select>
+
+                        <label for="monsterColor">Kleur</label>
+                        <select name="color" id="monsterColor" class="form-control">
+                            <option value="red">Red</option>
+                        </select>
+
+                        <label for="monsterEyes">Aantal ogen</label>
+                        <input type="number" name="eyes" id="monsterEyes" class="form-control">
+
+                    </div>
+
+                    <hr>
+
+                    <h4>Moves</h4>
+
+                    <div class="form-check">
+                        <input type="checkbox" name="canFly" id="monsterCanFly" class="form-check-input">
+                        <label for="monsterCanFly" class="form-check-label">Kan vliegen?</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" name="canFly" id="monsterCanSwim" class="form-check-input">
+                        <label for="monsterCanSwim" class="form-check-label">Kan zwemmen?</label>
+                    </div>
+
+                    <hr>
+
+                    <button id="saveMonster" type="submit" class="btn btn-info">Opslaan</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-8">
+            <button id="showJungle" class="btn btn-info">Jungle</button>
+            <button id="showSahara" class="btn btn-info">Sahara</button>
+            <button id="showNorthPole" class="btn btn-info">Noordpool</button>
+            <div id="weather" class="weather"></div>
+
+            <div id="jungleGrid" class="grid-container jungle"></div>
+            <div id="saharaGrid" class="grid-container sahara"></div>
+            <div id="northPoleGrid" class="grid-container north-pole"></div>
+        </div>
+    </div>
+    <div class="partial quarter">
+
+    </div>
+    <div class="partial half">
+
+    </div>
 </div>
 <script type="text/javascript" src="bundle.js"></script>
 <script type="text/javascript">

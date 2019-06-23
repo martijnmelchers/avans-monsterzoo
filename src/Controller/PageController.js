@@ -5,6 +5,9 @@ import { GridController } from '../Controller/GridController';
 import { WeatherController } from '../Controller/WeatherController';
 import { WeatherView } from '../View/WeatherView';
 import { WeatherModel } from '../Model/weather';
+import { MonsterModel}  from '../Model/monster';
+import {MonsterController } from '../Controller/MonsterController';
+import {MonsterView} from '../View/MonsterView';
 
 export class PageController extends Controller {
     initialize() {
@@ -17,11 +20,19 @@ export class PageController extends Controller {
         this.initializeNorthPole();
 
         this.initializeWeather();
+        this.initializeMonsterCreator();
 
         this.view.render();
-        this.resetVisible();
+
+        this.onShowJungle();
     }
 
+    initializeMonsterCreator(){
+        this.monsterView = new MonsterView(document.getElementById('monster-creator'));
+        this.monsterModel = new MonsterModel();
+        this.monsterController = new MonsterController(this.monsterModel, this.monsterView);
+        this.monsterController.initialize();
+    }
 
     initializeWeather() {
         this.weatherView = new WeatherView(document.getElementById("weather"));

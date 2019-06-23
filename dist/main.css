@@ -1,8 +1,12 @@
+
+html, body  {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
 .zoo {
 
 }
-
-
 .configurator {
     height: 500px;
     border: 1px solid black;
@@ -30,10 +34,32 @@
 
 .zoo-tile {
     border: 1px solid black;
-    background-image: url('../grass-jungle.png')
+    background-size: cover !important;
 }
 
-.zoo-tile.disabled {
-    background: red;
-    background-image: url("../water.png");
+
+
+.grid-container.jungle .zoo-tile {
+    background-image: url('../grass.jpg')
+}
+
+.grid-container.jungle .zoo-tile.disabled{
+    background: url("../water.png");
+}
+
+.grid-container.sahara .zoo-tile {
+    background-image: url('../sand.jpg')
+}
+
+.grid-container.sahara .zoo-tile.disabled{
+    background: url("../water.png");
+}
+
+
+.grid-container.north-pole .zoo-tile {
+    background-image: url('../ice.jpg')
+}
+
+.grid-container.north-pole .zoo-tile.disabled{
+    background: url("../water.png");
 }

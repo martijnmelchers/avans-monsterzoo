@@ -13,9 +13,15 @@ export class MonsterController extends Controller {
     saveMonster(){
 
     }
-    
+
     onMonsterCreate(e){
         e.preventDefault();
-        console.log("Form submit epicness");
+        var formData =  new FormData(e.target);
+        
+        var data = formData.entries();
+        // Display the key/value pairs
+        for (var pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
     }
 }

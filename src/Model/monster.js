@@ -27,4 +27,16 @@ export class MonsterModel {
             }
         }
     }
+
+
+    configureFromForm(formData){
+        var monsterConfig = {
+            
+        };
+        
+        for (var pair of formData.entries()) {
+            monsterConfig[pair[0]] = pair[1];
+        }
+        this.configure(monsterConfig);
+    }
 }

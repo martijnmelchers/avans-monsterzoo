@@ -1,42 +1,27 @@
 export class MonsterModel {
-    constructor(){
+    constructor() {
         this.name = "Monster";
         this.element = "Monster";
         this.furType = "";
         this.numArms = 0;
         this.numLegs = 0;
-        this.canSwim = false;     
+        this.canSwim = false;
         this.canFly = true;
         this.color = "";
     }
 
-    screech(){
+    screech() {
         // TODO: Play sound or change color.
     }
-    
+
     // Check if the monster has a valid setup.
-    verify(){
+    verify() {
         // TODO
     }
-    
-    configure(properties){
-        for (const prop in properties) {
-            if (properties.hasOwnProperty(prop)) {
-                const element = properties[prop];
-                this[prop] = element;
-            }
-        }
+
+    setProperty(property, value) {
+        this[property] = value;
     }
 
 
-    configureFromForm(formData){
-        var monsterConfig = {
-            
-        };
-        
-        for (var pair of formData.entries()) {
-            monsterConfig[pair[0]] = pair[1];
-        }
-        this.configure(monsterConfig);
-    }
 }

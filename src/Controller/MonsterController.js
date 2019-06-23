@@ -16,12 +16,14 @@ export class MonsterController extends Controller {
 
     onMonsterCreate(e){
         e.preventDefault();
-        var formData =  new FormData(e.target);
-        
-        var data = formData.entries();
+        const formData =  new FormData(e.target);
+        const monster = new MonsterModel();
+
         // Display the key/value pairs
-        for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
+        for (const pair of formData.entries()) {
+            monster.setProperty(pair[0], pair[1])
         }
+
+        console.log(monster);
     }
 }

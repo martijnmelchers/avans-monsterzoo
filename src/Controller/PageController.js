@@ -5,9 +5,9 @@ import { GridController } from '../Controller/GridController';
 import { WeatherController } from '../Controller/WeatherController';
 import { WeatherView } from '../View/WeatherView';
 import { WeatherModel } from '../Model/weather';
-import { MonsterModel}  from '../Model/monster';
-import {MonsterController } from '../Controller/MonsterController';
-import {MonsterView} from '../View/MonsterView';
+import { MonsterModel } from '../Model/monster';
+import { MonsterController } from '../Controller/MonsterController';
+import { MonsterView } from '../View/MonsterView';
 
 export class PageController extends Controller {
     initialize() {
@@ -27,7 +27,7 @@ export class PageController extends Controller {
         this.onShowJungle();
     }
 
-    initializeMonsterCreator(){
+    initializeMonsterCreator() {
         this.monsterView = new MonsterView(document.getElementById('monster-creator'));
         this.monsterModel = new MonsterModel();
         this.monsterController = new MonsterController(this.monsterModel, this.monsterView);

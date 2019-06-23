@@ -61,6 +61,7 @@ export class Storage {
         return JSON.parse(localStorage.getItem('zoo_data')).find(x => x.region === region);
     }
 
+
     save() {
 
     }

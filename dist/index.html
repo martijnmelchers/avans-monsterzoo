@@ -24,6 +24,15 @@
                     <div class="form-group">
                         <label for="monsterName">Monster naam</label>
                         <input type="text" name="name" id="monsterName" class="form-control">
+
+                        
+                        <label for="">Monster type</label>
+                        <select name="element" id="monsterType" class="form-control">
+                                <option value="Tentacles">Water</option>
+                                <option value="Fins">Vuur</option>
+                                <option value="Fins">Aarde</option>
+                                <option value="Fins">Wind</option>
+                            </select>
                     </div>
 
                     <hr>
@@ -93,6 +102,15 @@
                     </div>
 
                     <hr>
+
+
+                    <div class="form-group">
+                        <div id="monsterCanvas">Draw your monster<br/></div>
+
+                        <button class="btn btn-danger" id="eraseButton">Erase mode</button>
+                        <button class="btn btn-danger" id="saveImage">Save image</button>
+                        <button class="btn btn-danger" id="loadImage">Load image</button>
+                    </div>
 
                     <button id="saveMonster" type="submit" class="btn btn-info">Opslaan</button>
                 </form>

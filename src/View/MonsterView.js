@@ -1,20 +1,48 @@
 import { View } from "./View";
 
-
+import { Storage } from "../Model/storage";
 
 export class MonsterView extends View {
+    static drag(ev) {
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+    }
+
+    static playSound() {
+        new Audio('../ding.wav').play();
+    }
+
+    static changeInfo(ev) {
+        const modal = document.getElementById("infoModal");
+        const monster = Storage.getPlacedMonster(ev.target.parentElement.parentElement.dataset.region, parseInt(ev.target.id));
+
+        if(!monster) return;
+
+        modal.querySelector("#infoArmType").innerHTML = monster.armType;
+        modal.querySelector("#infoArms").innerHTML = monster.numArms;
+        modal.querySelector("#infoLegs").innerHTML = monster.numLegs;
+        modal.querySelector("#infoFurType").innerHTML = monster.furType;
+        modal.querySelector("#infoFurColor").innerHTML = monster.color;
+        modal.querySelector("#infoEyes").innerHTML = monster.eyes;
+        modal.querySelector("#infoType").innerHTML = monster.element;
+        modal.querySelector("#infoCanFly").innerHTML = monster.canFly ? "Ja" : "Nee";
+        modal.querySelector("#infoCanSwim").innerHTML = monster.canSwim ? "Ja" : "Nee";
+        modal.querySelector("#infoImage").src = monster.drawing;
+        modal.querySelector('#deleteButton').dataset.id = monster.id;
+        modal.querySelector('#deleteButton').dataset.region = monster.region;
+    }
 
     render(model) {
 
+        this.element.addEventListener('dragover', this.onDragOver);
+        this.element.addEventListener("drop", this.onMonsterDrop);
         this.labels = {
             eyes: "Aantal ogen",
             canSwim: "kan hij zwemmen",
             arms: "Aantal armen",
             legs: "Aantal benen",
-            legType: "Type been",
             armType: "Type arm",
             fur: "Type vacht",
-            canFly: "Kan hij vliegen", 
+            canFly: "Kan hij vliegen",
             color: "Kleur",
         };
 
@@ -28,20 +56,29 @@ export class MonsterView extends View {
         let container = this.element.querySelector("#monsterCanvas");
         this.init(container, 250, 250, "#fff");
 
+        document.getElementById("deleteButton").addEventListener('click', this.onDeleteClick);
+
 
         if (model) {
             if (model.limitations) {
                 this.setLimitations(model.limitations);
             }
         }
+
     }
+
+    onDragOver(ev){
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "move";
+    }
+
 
 
     setLimitations(limitations) {
         //TODO: change fields based on limitations.
         this.resetFields();
 
-    
+
         for (const limitation in limitations) {
             if (limitations.hasOwnProperty(limitation)) {
                 const element = limitations[limitation];
@@ -104,7 +141,6 @@ export class MonsterView extends View {
 
         this.canvas.node.onmousedown = (e) => {
             this.canvas.isDrawing = true;
-            console.log("Drawing?");
         };
         this.canvas.node.onmouseup = (e) => {
             this.canvas.isDrawing = false;
@@ -113,6 +149,12 @@ export class MonsterView extends View {
         this.element.querySelector("#eraseButton").addEventListener('click', (e) => {
             this.canvas.erase = !this.canvas.erase;
         });
+
+        this.element.querySelector("#clearCanvas").addEventListener('click', (e) => {
+            ctx.clearTo("#fff");
+        });
+
+
     }
 
     getMousePos(canvas, evt) {
@@ -131,13 +173,14 @@ export class MonsterView extends View {
 
         image.src = monster.drawing;
         image.draggable = true;
-        image.addEventListener('dragstart', this.drag);
+        image.dataset.toggle = "modal";
+        image.dataset.target = "#infoModal";
+
+        image.addEventListener('dragstart', MonsterView.drag);
+        image.addEventListener('click', MonsterView.playSound);
+        image.addEventListener('click', MonsterView.changeInfo);
 
         element.appendChild(image);
-    }
-
-    drag(ev) {
-        ev.dataTransfer.setData("text/plain", ev.target.id);
     }
 
     exportCanvas() {
@@ -184,7 +227,7 @@ export class MonsterView extends View {
 
         let form_group = document.createElement("div");
         form_group.classList.add("form-group");
-        
+
         let el = null;
 
         let fieldType = this.getLimitationFieldType(fieldVal);

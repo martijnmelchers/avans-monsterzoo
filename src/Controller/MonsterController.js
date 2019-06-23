@@ -3,11 +3,14 @@ import { MonsterModel } from "../Model/monster";
 import { View } from "../View/View";
 import { Storage } from "../Model/storage";
 import { Config } from "../Model/config";
+import { GridView } from "../View/GridView";
 
 export class MonsterController extends Controller {
     initialize() {
         this.view.onMonsterCreate = this.onMonsterCreate.bind(this);
+        this.view.onMonsterDrop = this.onMonsterDrop.bind(this);
         this.view.onElementChange = this.onElementChange.bind(this);
+        this.view.onDeleteClick = this.deleteMonster.bind(this);
 
         let config = {
             data: {},
@@ -34,6 +37,7 @@ export class MonsterController extends Controller {
         View.scrollToTop();
 
         this.view.displayMonster(monster);
+        this.view.canvas.context.clearTo("#fff");
     }
 
     onElementChange(e) {
@@ -45,5 +49,20 @@ export class MonsterController extends Controller {
         };
 
         this.view.render(data)
+    }
+
+    deleteMonster(e) {
+        const id = parseInt(e.target.dataset.id);
+        const region = e.target.dataset.region;
+
+        Storage.removeMonster(region, id);
+        GridView.removeMonster(region, id);
+    }
+
+
+
+    // When a monster is dropped on the configure screen to edit it.
+    onMonsterDrop(ev){
+        console.log("DROPPED A MONSTER OVER HERE");
     }
 }

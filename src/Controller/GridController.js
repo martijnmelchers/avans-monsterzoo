@@ -4,14 +4,13 @@ import { MonsterModel } from '../Model/monster';
 export class GridController extends Controller {
     initialize() {
         this.view.drop = this.drop.bind(this);
-
     }
 
     drop(ev) {
         ev.preventDefault();
         const id = parseInt(ev.dataTransfer.getData("text/plain"));
 
-        if (!id) return;
+        if (!id || ev.target.nodeName === "IMG") return;
 
         const region = ev.target.parentElement.dataset.region;
         const x = parseInt(ev.target.dataset.x);
@@ -19,7 +18,7 @@ export class GridController extends Controller {
         if(Storage.getAvailableMonster(id) == null) {
             const monster = Storage.getPlacedMonster(region, id);
 
-            if(!monster) return;
+            if (!monster) return;
 
             monster.x = x;
             monster.y = y;
@@ -28,7 +27,7 @@ export class GridController extends Controller {
         } else {
             const monster = Storage.getAvailableMonster(id);
 
-            if(!monster) return;
+            if (!monster) return;
 
             monster.x = x;
             monster.y = y;
@@ -36,6 +35,7 @@ export class GridController extends Controller {
 
             Storage.placeMonster(monster);
         }
+
 
         ev.target.appendChild(document.getElementById(id));
 

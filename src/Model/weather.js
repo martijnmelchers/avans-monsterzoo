@@ -15,7 +15,6 @@ export class WeatherModel {
     getWeather(loc, callback){
         let xmlHttp = new XMLHttpRequest();
         let requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${loc}&APPID=${Config.weather.apiKey}&units=${Config.weather.units}`;
-        console.log(requestUrl);
         fetch(requestUrl).then((response) =>{
             return response.json();
         }).then((json) => {

@@ -9,11 +9,6 @@
 </head>
 <body>
 
-
-<div id="bruh" draggable="true" ondragstart="drag(event)">
-    bruh cutaro
-</div>
-
 <div id="page-wrapper" class="container">
     <div class="row">
         <div class="col-4">
@@ -28,10 +23,10 @@
 
                         <label for="monsterType">Monster type</label>
                         <select name="element" id="monsterType" class="form-control">
-                                <option value="water">Water</option>
-                                <option value="fire">Vuur</option>
-                                <option value="earth">Aarde</option>
-                                <option value="wind">Wind</option>
+                            <option value="water">Water</option>
+                            <option value="fire">Vuur</option>
+                            <option value="earth">Aarde</option>
+                            <option value="wind">Wind</option>
                         </select>
                     </div>
 
@@ -47,7 +42,8 @@
                     <div class="form-group">
 
                         <label for="monsterArms">Aantal armen</label>
-                        <input type="number" name="arms" id="monsterArms" min="" max="" class=" monsterInput form-control">
+                        <input type="number" name="arms" id="monsterArms" min="" max=""
+                               class=" monsterInput form-control">
 
                         <label for="monsterArmType">Type armen</label>
                         <select name="armType" id="monsterArmType" class="form-control">
@@ -112,9 +108,8 @@
                     <div class="form-group">
                         <div id="monsterCanvas">Draw your monster<br/></div>
 
-                        <button class="btn btn-danger" id="eraseButton">Erase mode</button>
-                        <button class="btn btn-danger" id="saveImage">Save image</button>
-                        <button class="btn btn-danger" id="loadImage">Load image</button>
+                        <button class="btn btn-danger" type="button" id="eraseButton">Wissel pen/gum</button>
+                        <button class="btn btn-danger" type="button" id="clearCanvas">Verwijderen</button>
                     </div>
 
                     <button id="saveMonster" type="submit" class="btn btn-info">Opslaan</button>
@@ -143,20 +138,49 @@
             </div>
         </div>
     </div>
-    <div class="partial quarter">
+</div>
 
-    </div>
-    <div class="partial half">
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Monster Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Armtype: <span id="infoArmType"></span><br>
+                Armen: <span id="infoArms"></span><br>
+                Benen: <span id="infoLegs"></span><br>
+                Vachttype: <span id="infoFurType"></span><br>
+                Vacht: <span id="infoFurColor"></span><br>
+                Ogen: <span id="infoEyes"></span><br>
+                Type: <span id="infoType"></span><br>
+                Naam: <span id="infoName"></span><br>
+                Kan vliegen?: <span id="infoCanFly"></span><br>
+                Kan zwemmen?: <span id="infoCanSwim"></span><br>
 
+                Monster: <br><img src="#" id="infoImage"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Sluiten</button>
+                <button type="button" class="btn btn-danger" id="deleteButton" data-dismiss="modal">Verwijderen</button>
+            </div>
+        </div>
     </div>
 </div>
-<script type="text/javascript" src="bundle.js"></script>
-<script type="text/javascript">
-    function drag(ev) {
-        console.log("Help I am being dragged monkaW");
 
-        ev.dataTransfer.setData("text/plain", ev.target.id);
-    }
-</script>
+<script type="text/javascript" src="bundle.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>

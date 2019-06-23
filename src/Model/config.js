@@ -52,6 +52,17 @@ export const Config = {
                         "Rood",
                         "Groen"
                     ]
+                },
+                power: {
+                    fields: [
+                        {
+                            name: "powerType",
+                            types: [
+                                "Splash",
+                                "Storm",
+                            ]
+                        }
+                    ]
                 }
             },
             fire: {

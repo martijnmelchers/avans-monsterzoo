@@ -44,6 +44,7 @@ export class MonsterView extends View {
             fur: "Type vacht",
             canFly: "Kan hij vliegen",
             color: "Kleur",
+            powerType: "Speciale kracht",
         };
 
         let monsterForm = this.element.querySelector("#monsterCreateForm");

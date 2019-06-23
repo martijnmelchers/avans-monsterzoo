@@ -12,6 +12,8 @@ export class MonsterModel {
         this.region = "";
         this.x = 0;
         this.y = 0;
+        this.powerType = "";
+        this.power = 0;
     }
 
     screech() {

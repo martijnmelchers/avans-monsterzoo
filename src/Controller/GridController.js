@@ -23,7 +23,6 @@ export class GridController extends Controller {
             monster.x = x;
             monster.y = y;
 
-            Storage.moveMonster(monster);
         } else {
             const monster = Storage.getAvailableMonster(id);
 
@@ -35,8 +34,6 @@ export class GridController extends Controller {
 
             Storage.placeMonster(monster);
         }
-
-
         ev.target.appendChild(document.getElementById(id));
 
     
